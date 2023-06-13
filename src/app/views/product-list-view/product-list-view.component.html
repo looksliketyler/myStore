@@ -1,0 +1,40 @@
+<div class="container-fluid pb-5">
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="isAddedToCart">
+        <app-alert [isAddedToCart]="isAddedToCart"></app-alert>
+      </ng-container>
+      <div class="container">
+        <div class="row p-2">
+          <div class="col pt-5">
+            <div class="row p-3">
+              <div class="col">
+                <h1 class="text-light">Welcome to myStore</h1>
+              </div>
+            </div>
+            <div class="row mx-auto">
+              <div class="col-12 m-2">
+                <h3>Popular Products</h3>
+              </div>
+              <ng-container *ngFor="let product of popularProducts">
+                <div class="col-md-4 p-1 pt-2">
+                  <app-product-card [product]="product" (addedToCart)="addedToCart($event)"></app-product-card>
+                </div>
+              </ng-container>
+            </div>
+            <div class="row mx-auto mt-4">
+              <div class="col-12 m-2">
+                <h3>All Products</h3>
+              </div>
+              <ng-container *ngFor="let product of apiProducts">
+                <div class="col-md-4 p-1 pt-2">
+                  <app-product-card [product]="product" (addedToCart)="addedToCart($event)"></app-product-card>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
