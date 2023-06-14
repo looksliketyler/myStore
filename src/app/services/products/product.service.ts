@@ -86,4 +86,11 @@ export class ProductService {
   public getProductsInCart(): Product[] {
     return this.productsInCart;
   }
+
+  /**
+   * @description - wipes clean the cart
+   */
+  public clearCart(): void {
+    this.productsInCart = [];
+  }
 }

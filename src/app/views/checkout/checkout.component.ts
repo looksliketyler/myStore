@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { ProductService } from 'src/app/services/products/product.service';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -11,7 +13,7 @@ export class CheckoutComponent {
   public formModel: any = {};
   public billingAddress: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private productService: ProductService) {}
 
   /**
    * @description - toggles in view if the user's billing address is same as shipping..and hides the billing address section of form
@@ -36,6 +38,7 @@ export class CheckoutComponent {
    */
   private submitForm(form: NgForm): void {
     console.log(form.value);
+    this.productService.clearCart();
   }
 
 }

@@ -14,7 +14,6 @@ export class ProductCardComponent {
   @Input() product: Product;
   @Input() details: boolean = false;
   @Output() addedToCart: EventEmitter<any> = new EventEmitter<any>();
-  public options: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(private router: Router, private productService: ProductService) {}
 
@@ -53,6 +52,7 @@ export class ProductCardComponent {
   public submitForm(quantity: number): void {
     const quantityPrice: number = this.product.price * quantity
     this.productService.addToCart(this.product, quantity, quantityPrice);
+    this.product.quantity = 1;
     this.emitAddedtoCart();
   }
 }

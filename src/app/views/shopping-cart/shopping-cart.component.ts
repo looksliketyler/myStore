@@ -17,34 +17,39 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productService.getProductsInCart();
-    this.getTotalAmount();
+    this.calculateTotalAmount();
   }
 
   /**
-   * @description - method loops over products to determine total price to display to user
+   * @description - method used to calculate total price of all products
    */
-  private getTotalAmount(): void {
-    let price: number;
-    this.products.forEach(product => {
-      price = product.price * product.quantity;
-      this.totalAmount += product.quantityPrice;
-    });
+  private calculateTotalAmount(): void {
+    this.totalAmount = this.products.reduce((total, product) => {
+      return total + product.price * product.quantity;
+    }, 0);
   }
 
   /**
-   * @description - removes product from cart based on id
-   * @param {number} id - id of prod to be removed
+   * @description - removes product from shopping cart based off id
+   * @param {number} id - passed id of product to be removed
    */
   public removeItem(id: number): void {
     this.products = this.products.filter(product => product.id !== id);
     this.productService.removeFromCart(id);
+    this.calculateTotalAmount();
   }
 
   /**
-   * @description - when checkout button in ui is cliked, routes to checkout form
+   * @description - for event emitter, calls calculateTotalAmount()
+   */
+  public updateTotalAmount(): void {
+    this.calculateTotalAmount();
+  }
+
+  /**
+   * @description - navigates to checkout page
    */
   public checkout(): void {
     this.router.navigateByUrl('/checkout');
   }
-
 }
