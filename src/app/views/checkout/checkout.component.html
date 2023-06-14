@@ -57,11 +57,14 @@
           <div class="col">
             <div class="form-group">
               <label for="state">State <span class="text-muted">(TX, OH, CA, FL...)</span>:</label>
-              <input type="text" id="state" name="state" class="form-control" minlength="2" maxlength="2" required [(ngModel)]="formModel.state">
+              <input type="text" id="state" name="state" class="form-control" pattern="^[A-Z]{2}$" minlength="2" maxlength="2" required [(ngModel)]="formModel.state">
               <ng-container *ngIf="form.controls['state']?.invalid && (form.controls['state'].dirty || form.controls['state'].touched)">
                 <div class="alert alert-danger">
                   <ng-container *ngIf="form.controls['state'].errors?.['required']">
                     <div>State is required.</div>
+                  </ng-container>
+                  <ng-container *ngIf="form.controls['state'].errors?.['pattern']">
+                    <div>State must be two uppercase letters.</div>
                   </ng-container>
                 </div>
               </ng-container>
@@ -71,11 +74,14 @@
           <div class="col">
             <div class="form-group">
               <label for="zip">Zip Code:</label>
-              <input type="text" id="zip" name="zip" class="form-control" required minlength="5" maxlength="5" [(ngModel)]="formModel.zip">
+              <input type="text" id="zip" name="zip" class="form-control" required pattern="[0-9]*" minlength="5" maxlength="5" [(ngModel)]="formModel.zip">
               <ng-container *ngIf="form.controls['zip']?.invalid && (form.controls['zip'].dirty || form.controls['zip'].touched)">
                 <div class="alert alert-danger">
                   <ng-container *ngIf="form.controls['zip'].errors?.['required']">
                     <div>Zip Code is required.</div>
+                  </ng-container>
+                  <ng-container *ngIf="form.controls['zip'].errors?.['pattern']">
+                    <div>Zip Code must be a 5 digit number.</div>
                   </ng-container>
                 </div>
               </ng-container>
@@ -143,11 +149,14 @@
             <div class="col">
               <div class="form-group">
                 <label for="stateB">State <span class="text-muted">(TX, OH, CA, FL...)</span>:</label>
-                <input type="text" id="stateB" name="stateB" class="form-control" minlength="2" maxlength="2" [required]="!billingAddress" [(ngModel)]="formModel.stateB">
+                <input type="text" id="stateB" name="stateB" class="form-control" pattern="^[A-Z]{2}$" minlength="2" maxlength="2" [required]="!billingAddress" [(ngModel)]="formModel.stateB">
                 <ng-container *ngIf="form.controls['stateB']?.invalid && (form.controls['stateB'].dirty || form.controls['stateB'].touched)">
                   <div class="alert alert-danger">
                     <ng-container *ngIf="!billingAddress && form.controls['stateB'].errors?.['required']">
                       <div>State is required.</div>
+                    </ng-container>
+                    <ng-container *ngIf="!billingAddress && form.controls['stateB'].errors?.['pattern']">
+                      <div>State must be two uppercase letters.</div>
                     </ng-container>
                   </div>
                 </ng-container>
@@ -157,11 +166,14 @@
             <div class="col">
               <div class="form-group">
                 <label for="zipB">Zip Code:</label>
-                <input type="text" id="zipB" name="zipB" class="form-control" minlength="5" maxlength="5" [required]="!billingAddress" [(ngModel)]="formModel.zipB">
+                <input type="text" id="zipB" name="zipB" class="form-control" pattern="[0-9]*" minlength="5" maxlength="5" [required]="!billingAddress" [(ngModel)]="formModel.zipB">
                 <ng-container *ngIf="form.controls['zipB']?.invalid && (form.controls['zipB'].dirty || form.controls['zipB'].touched)"r>
                   <div class="alert alert-danger">
                     <ng-container *ngIf="!billingAddress && form.controls['zipB'].errors?.['required']">
                       <div>Zip Code is required.</div>
+                    </ng-container>
+                    <ng-container *ngIf="!billingAddress && form.controls['zipB'].errors?.['pattern']">
+                      <div>Zip Code must be a 5 digit number.</div>
                     </ng-container>
                   </div>
                 </ng-container>
@@ -189,11 +201,14 @@
           <div class="col-6">
             <div class="form-group">
               <label for="ccNumber">Card Number:</label>
-              <input type="text" id="ccNumber" name="ccNumber" class="form-control" minlength="12" maxlength="16" required [(ngModel)]="formModel.ccNumber">
+              <input type="text" id="ccNumber" name="ccNumber" class="form-control" pattern="[0-9]*" minlength="12" maxlength="16" required [(ngModel)]="formModel.ccNumber">
               <ng-container *ngIf="form.controls['ccNumber']?.invalid && (form.controls['ccNumber'].dirty || form.controls['ccNumber'].touched)">
                 <div class="alert alert-danger">
                   <ng-container *ngIf="form.controls['ccNumber'].errors?.['required']">
                     <div>Card Number is required.</div>
+                  </ng-container>
+                  <ng-container *ngIf="form.controls['ccNumber'].errors?.['pattern']">
+                    <div>Credit Card number must be a 12-16 digit number.</div>
                   </ng-container>
                 </div>
               </ng-container>
@@ -203,11 +218,14 @@
           <div class="col-3">
             <div class="form-group">
               <label for="expDate">Exp Date <span class="text-muted">(MM/DDDD)</span>:</label>
-              <input type="text" id="expDate" name="expDate" class="form-control" required minlength="7" maxlength="7" [(ngModel)]="formModel.expDate">
+              <input type="text" id="expDate" name="expDate" class="form-control" required pattern="^(0[1-9]|1[0-2])\/\d{4}$" minlength="7" maxlength="7" [(ngModel)]="formModel.expDate">
               <ng-container *ngIf="form.controls['expDate']?.invalid && (form.controls['expDate'].dirty || form.controls['expDate'].touched)">
                 <div class="alert alert-danger">
                   <ng-container *ngIf="form.controls['expDate'].errors?.['required']">
                     <div>Exp Date is required.</div>
+                  </ng-container>
+                  <ng-container *ngIf="form.controls['expDate'].errors?.['pattern']">
+                    <div>Exp Date must be in format MM/DDDD</div>
                   </ng-container>
                 </div>
               </ng-container>
@@ -217,11 +235,14 @@
           <div class="col-3">
             <div class="form-group">
               <label for="cvv">CVV Code:</label>
-              <input type="text" id="cvv" name="cvv" class="form-control" minlength="3" maxlength="3" required [(ngModel)]="formModel.cvv">
+              <input type="text" id="cvv" name="cvv" class="form-control" pattern="[0-9]*" minlength="3" maxlength="3" required [(ngModel)]="formModel.cvv">
               <ng-container *ngIf="form.controls['cvv']?.invalid && (form.controls['cvv'].dirty || form.controls['cvv'].touched)">
                 <div class="alert alert-danger">
                   <ng-container *ngIf="form.controls['cvv'].errors?.['required']">
                     <div>CVV Code is required.</div>
+                  </ng-container>
+                  <ng-container *ngIf="form.controls['cvv'].errors?.['pattern']">
+                    <div>CVV must be a 3 digit number.</div>
                   </ng-container>
                 </div>
               </ng-container>

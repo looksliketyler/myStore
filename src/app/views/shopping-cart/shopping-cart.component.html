@@ -1,6 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 my-3 ps-4">
+      <ng-container *ngIf="isRemovedFromCart">
+        <app-alert [isRemovedFromCart]="isRemovedFromCart"></app-alert>
+      </ng-container>
       <h2 class="my-3 ps-4">Shopping Cart</h2>
       <ng-container *ngIf="!products.length; else cart">
         <h5>Cart empty! Go find something to buy.</h5>

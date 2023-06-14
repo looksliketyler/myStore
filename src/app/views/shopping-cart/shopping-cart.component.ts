@@ -12,6 +12,7 @@ import { ProductService } from 'src/app/services/products/product.service';
 export class ShoppingCartComponent implements OnInit {
   public products: Product[] = [];
   public totalAmount: number = 0;
+  public isRemovedFromCart: boolean = false;
 
   constructor(private productService: ProductService, private router: Router) {}
 
@@ -34,6 +35,7 @@ export class ShoppingCartComponent implements OnInit {
    * @param {number} id - passed id of product to be removed
    */
   public removeItem(id: number): void {
+    this.removeFromCartAlert();
     this.products = this.products.filter(product => product.id !== id);
     this.productService.removeFromCart(id);
     this.calculateTotalAmount();
@@ -51,5 +53,15 @@ export class ShoppingCartComponent implements OnInit {
    */
   public checkout(): void {
     this.router.navigateByUrl('/checkout');
+  }
+
+  /**
+   * @description - timer for removed from cart alert
+   */
+  private removeFromCartAlert(): void {
+    this.isRemovedFromCart = true;
+    setTimeout(() => {
+      this.isRemovedFromCart = false;
+    }, 3000);
   }
 }

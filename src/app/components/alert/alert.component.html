@@ -5,3 +5,11 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   </div>
 </ng-container>
+
+<!-- Section for removing from cart -->
+<ng-container *ngIf="isRemovedFromCart">
+  <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <strong>Oh jeez!</strong> You removed and item from the cart!
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+</ng-container>

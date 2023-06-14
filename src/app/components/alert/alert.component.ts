@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class AlertComponent {
   @Input() isAddedToCart: boolean = false;
+  @Input() isRemovedFromCart: boolean = false;
 
 }
